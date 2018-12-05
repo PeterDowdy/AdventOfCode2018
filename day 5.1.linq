@@ -5,24 +5,17 @@ bool cancel(char a, char b) {
 }
 void Main() {
 	var input = File.ReadAllText($"{Path.GetDirectoryName (Util.CurrentQueryPath)}/5.txt");
-	input.Length.Dump();
 	var parseStack = new Stack<char>();
-	var curLength = input.Length;
-		curLength = input.Length;
-	while (input.Any())
+	for (var i = 0; i < input.Length; i++)
 	{
-		Console.WriteLine($"Length of {input.Length}");
-		if (parseStack.Any() && cancel(parseStack.Peek(), input.First()))
-			{
-				parseStack.Pop();
-				input = input.Substring(1);
-			}
-			else
-			{
-				parseStack.Push(input.First());
-  		}
+		if (parseStack.Any() && cancel(parseStack.Peek(), input[i]))
+		{
+			parseStack.Pop();
 		}
-		input = new string(parseStack.ToArray());
-	input.Dump();
-	input.Length.Dump();
+		else
+		{
+			parseStack.Push(input[i]);
+		}
+	}
+	parseStack.Count.Dump();
 }

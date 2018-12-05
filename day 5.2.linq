@@ -3,28 +3,25 @@
 bool cancel(char a, char b) {
 	return Math.Abs(a-b) == 32;
 }
-void Main() {
-var polymerExclusions = "abcdefghijklmnopqrstuvwxyz".ToDictionary(k => k, k =>
+void Main()
 {
 	var input = File.ReadAllText($"{Path.GetDirectoryName(Util.CurrentQueryPath)}/5.txt");
-	var parseStack = new Stack<char>();
-	var curLength = input.Length;
-	curLength = input.Length;
-	while (input.Any())
+	var polymerExclusions = "abcdefghijklmnopqrstuvwxyz".ToDictionary(k => k, k =>
 	{
-		if (input.First() == k || (input.First() + 32) == k) { input = input.Substring(1);}
-		else if (parseStack.Any() && cancel(parseStack.Peek(), input.First()))
+		var parseStack = new Stack<char>();
+		for (var i = 0; i < input.Length; i++)
 		{
-			parseStack.Pop();
-			input = input.Substring(1);
+			if (input[i] == k || (input[i] + 32) == k) { continue; }
+			else if (parseStack.Any() && cancel(parseStack.Peek(), input[i]))
+			{
+				parseStack.Pop();
+			}
+			else
+			{
+				parseStack.Push(input[i]);
+			}
 		}
-		else
-		{
-			parseStack.Push(input.First());
-			input = input.Substring(1);
-		}
-	}
-	return parseStack.Count;
-});
-polymerExclusions.Values.Min().Dump();
+		return parseStack.Count;
+	});
+	polymerExclusions.Values.Min().Dump();
 }

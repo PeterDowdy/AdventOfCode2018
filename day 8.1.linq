@@ -62,4 +62,5 @@ void Main()
 		}
 	}
 	metadataCount.Dump();
+	//Should be 48496
 }

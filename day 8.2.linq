@@ -63,6 +63,7 @@ void Main()
 		}
 	}
 	EatTree(finalTree).Dump();
+	//Should be 32850
 }
 public int EatTree(HeaderNode node) {
 	if (node.ChildCount == 0) {

@@ -72,7 +72,7 @@ void Main()
 			var nextSequence = MakeString(cells);
 			if (sequence.Contains(nextSequence))
 			{
-				var lastSeen = sequence.IndexOf(nextSequence);
+				var lastSeen = sequence.IndexOf(nextSequence) + 1;
 				var minuteGap = minutes - lastSeen;
 				var minutesRemaining = 1000000000 - minutes;
 				minutes += minuteGap * (minutesRemaining / minuteGap);
